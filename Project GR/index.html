@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TweeLoop</title>
+  <meta name="description" content="Professionele rekenmachines voor school, werk en studie. Snelle levering binnen Nederland." />
+  <style>
+    :root {
+      --bg: #0b0f13;
+      --card: #0f1418;
+      --accent: #6ee7b7;
+      --radius: 14px;
+      --maxw: 1100px;
+      --gap: 18px;
+      --shadow: 0 6px 18px rgba(2,6,10,0.6);
+    }
+    * { box-sizing: border-box }
+    html,body{height:100%}
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, Arial;
+      background: linear-gradient(180deg, var(--bg), #071014 140%);
+      color: #fff;
+      padding: 36px 18px;
+      display: flex;
+      justify-content: center;
+    }
+    .site { width: 100%; max-width: var(--maxw); }
+
+    header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .logo { width: 56px; height: 56px; border-radius: 12px; background: linear-gradient(135deg, #0b1620, #07202a); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); }
+    h1 { font-size: 20px; margin: 0; color: #fff; }
+    .tag { color: #fff; font-size: 13px; }
+    nav { display: flex; gap: 12px; align-items: center; color: #fff; }
+    nav .btn, nav input { color: #fff; }
+    nav input::placeholder { color: #ddd; }
+    .btn{ background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer;color:#ffffff; }
+    .btn:active{transform:translateY(1px)}
+    .search{ display:flex;gap:12px;align-items:center;background:var(--card);padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:var(--shadow) }
+    .search input{background:transparent;border:0;outline:none;font-size:15px}
+    .controls{display:flex;gap:12px}
+
+    .quick-info {
+      background: #11171c;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 12px 20px;
+      margin-bottom: 26px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      text-align: center;
+      font-size: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    .quick-info div { color: #ddd; display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+    .quick-info svg { width: 18px; height: 18px; stroke: var(--accent); }
+
+    main { display: flex; gap: 20px; align-items: flex-start; }
+    .products { flex: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); }
+
+    .card { background: var(--card); padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 8px 30px rgba(2,6,10,0.5); color: #fff; display: flex; flex-direction: column; gap: 12px; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(6,255,180,0.2); }
+    .card img { width: 100%; height: 200px; object-fit: contain; background: linear-gradient(180deg, #081217, #071015); border-radius: 8px; padding: 8px; }
+    .meta { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .info { flex: 1; min-width: 0; }
+    .title { font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .subtitle { color: #ccc; font-size: 13px; margin-top: 6px; }
+    .price { font-size: 16px; font-weight: 800; color: var(--accent); white-space: nowrap; margin-left: 10px; }
+
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .primary { background: linear-gradient(90deg, var(--accent), #4bd9a6); border: 0; padding: 10px 12px; border-radius: 10px; font-weight: 700; cursor: pointer; color: #000; }
+
+    aside{position:relative;}
+    .panel{position:sticky;top:36px;background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03);}
+    .panel h3{margin:0 0 8px 0}
+    .specs{display:flex;flex-direction:column;gap:12px}
+    .spec{display:flex;justify-content:flex-start;color:var(--muted);font-size:14px;gap:12px}
+    .spec span:first-child { font-weight:600; min-width:120px; }
+    .spec span:last-child { flex:1; text-align:left; }
+
+    footer { margin-top: 26px; color: #fff; font-size: 13px; text-align: center; }
+
+    @media (max-width: 900px) {
+      main { flex-direction: column; }
+      .products { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="site">
+
+  <header>
+    <div class="brand">
+      <div class="logo">
+        <img src="recources/images/TweeLoop_Logo.png" alt="TweeLoop Logo" style="width:100%; height:100%; object-fit:contain; border-radius:12px;">
+      </div>
+      <div>
+        <h1>TweeLoop</h1>
+        <div class="tag">Hoge Kwaliteit Producten</div>
+      </div>
+    </div>
+    <nav>
+      <div class="search" role="search" aria-label="Zoek rekenmachines">
+        <input id="q" placeholder="Zoek"/>
+      </div>
+      <div class="controls">
+        <button class="btn">Winkelmandje</button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="quick-info">
+    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg> Garantie tot 3 jaar </div>
+    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path d="M3 3h18v18H3z" /></svg> Nog Iets Leuks </div>
+    <div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path d="M12 1v22M1 12h22" /></svg> Altijd goede kwaliteit </div>
+  </div>
+
+  <main>
+    <div class="products">
+
+      <article class="card" data-price="69.99">
+        <img src="recources/images/Ti-84_Plus_CE-T-1.png" alt="TI-84 Plus CE-T grafische rekenmachine">
+        <div class="meta">
+          <div class="info">
+            <div class="title">TI-84 Plus CE-T</div>
+            <div class="subtitle">Grafische rekenmachine - Met oplaadbare batterij</div>
+          </div>
+          <div class="price">€69,99 - €89,99</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+          <div class="actions">
+            <button class="primary">Koop nu</button>
+          </div>
+          <div style="color:#ffffff;font-size:13px"><strong>Uitverkocht</strong></div>
+        </div>
+      </article>
+
+      <article class="card" data-price="79.99">
+        <img src="recources/images/Ti-84_Plus_CE-T_Python-1.png" alt="TI-84 Plus CE-T grafische rekenmachine Python Editie">
+        <div class="meta">
+          <div class="info">
+            <div class="title">TI-84 Plus CE-T Python</div>
+            <div class="subtitle">Grafische rekenmachine - Python Editie</div>
+          </div>
+          <div class="price">€79,99 - €99,99</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+          <div class="actions">
+            <button class="primary">Koop nu</button>
+          </div>
+          <div style="color:#ffffff;font-size:13px"><strong>Uitverkocht</strong></div>
+        </div>
+      </article>
+
+      <article class="card" data-price="79.99">
+        <img src="recources/images/Casio_FX-CG50-1.png" alt="Casio fx-CG50 grafische rekenmachine">
+        <div class="meta">
+          <div class="info">
+            <div class="title">Casio - fx-CG50</div>
+            <div class="subtitle">Grafische rekenmachine - Casio fx-CG50</div>
+          </div>
+          <div class="price">€69,99 - €89,99</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+          <div class="actions">
+            <button class="primary">Koop nu</button>
+          </div>
+          <div style="color:#ffffff;font-size:13px"><strong>Uitverkocht</strong></div>
+        </div>
+      </article>
+
+      <article class="card" data-price="2.99">
+        <img src="recources/images/Oplader_Mini-Usba-1.png" alt="Oplader voor rekenmachines">
+        <div class="meta">
+          <div class="info">
+            <div class="title">Oplader</div>
+            <div class="subtitle">Oplader voor rekenmachines - Usb Mini naar Usb-a</div>
+          </div>
+          <div class="price">€2,99</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+          <div class="actions">
+            <button class="primary">Koop nu</button>
+          </div>
+          <div style="color:#ffffff;font-size:13px"><strong>Uitverkocht</strong></div>
+        </div>
+      </article>
+
+    </div>
+
+    <aside>
+      <div class="panel">
+        <h3>Snelle info</h3>
+        <div class="specs">
+          <div class="spec"><span>Verzending</span><span>1–3 werkdagen (NL)</span></div>
+          <div class="spec"><span>Betaling</span><span>iDEAL, PayPal, Creditcard</span></div>
+          <div class="spec"><span>Garantie</span><span>1-3 jaar</span></div>
+          <div class="spec"><span>Support</span><span>Algemenen Voorwaarden</span></div>
+        </div>
+
+        <hr style="border:none;height:1px;background:rgba(255,255,255,0.03);margin:12px 0;border-radius:2px" />
+        <h3>Filter</h3>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <select id="sort" style="flex:1;padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:inherit">
+            <option value="default">Standaard</option>
+            <option value="price-asc">Prijs laag → hoog</option>
+            <option value="price-desc">Prijs hoog → laag</option>
+          </select>
+          <button class="btn" id="reset">Reset</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <span id="year"></span> TweeLoop - Alle rechten voorbehouden - Klantenservice: Nog niet beschikbaar
+  </footer>
+</div>
+
+<script>
+document.getElementById('year').innerText = new Date().getFullYear();
+
+// Sorting
+const sortSelect = document.getElementById('sort');
+const resetBtn = document.getElementById('reset');
+const productContainer = document.querySelector('.products');
+
+sortSelect.addEventListener('change', () => {
+  const cards = Array.from(productContainer.querySelectorAll('.card'));
+  let sorted;
+  if(sortSelect.value === 'price-asc'){
+    sorted = cards.sort((a,b) => parseFloat(a.dataset.price) - parseFloat(b.dataset.price));
+  } else if(sortSelect.value === 'price-desc'){
+    sorted = cards.sort((a,b) => parseFloat(b.dataset.price) - parseFloat(a.dataset.price));
+  } else {
+    sorted = cards;
+  }
+  sorted.forEach(card => productContainer.appendChild(card));
+});
+
+resetBtn.addEventListener('click', () => {
+  sortSelect.value = 'default';
+  const cards = Array.from(productContainer.querySelectorAll('.card'));
+  cards.sort((a,b) => parseInt(a.dataset.price) - parseInt(b.dataset.price)); // optional: reset order by original
+  cards.forEach(card => productContainer.appendChild(card));
+});
+
+// Redirects
+document.querySelectorAll('.card').forEach(card => {
+  const btn = card.querySelector('.primary');
+  const title = card.querySelector('.title').innerText;
+  
+  btn.addEventListener('click', () => {
+    if(title.includes('TI-84 Plus CE-T Python')){
+      window.location.href = "Producten/TI-84_Plus_CE-T_Python.html";
+    } else if(title.includes('TI-84 Plus CE-T')){
+      window.location.href = "Producten/TI-84_Plus_CE-T.html";
+    } else if(title.includes('Casio - fx-CG50')){
+      window.location.href = "Producten/Casio_-_fx-CG50.html";
+    } else if(title.includes('Oplader')){
+      window.location.href = "Producten/Oplader_Mini-Usba.html";
+    }
+  });
+});
+
+</script>
+</body>
+</html>
