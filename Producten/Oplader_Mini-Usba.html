@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Oplader - TweeLoop</title>
+  <style>
+    :root {
+      --bg: #0b0f13;
+      --card: #0f1418;
+      --accent: #6ee7b7;
+      --radius: 14px;
+      --shadow: 0 6px 18px rgba(2,6,10,0.6);
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, Arial;
+      background: linear-gradient(180deg, var(--bg), #071014 140%);
+      color: #fff;
+      padding: 30px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0b1620, #07202a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+    }
+
+    h1 { margin: 0; font-size: 22px; }
+    .tag { font-size: 13px; color: #ccc; }
+
+    main {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .product-img { flex:1; min-width:300px; }
+    .main-img-wrapper { overflow:hidden; border-radius:12px; box-shadow:var(--shadow); }
+    .main-img-wrapper img { width:100%; border-radius:8px; transition:transform .5s ease; cursor:pointer; }
+    .main-img-wrapper img:hover { transform:scale(1.1); }
+    .gallery { display:flex; gap:10px; margin-top:10px; }
+    .gallery .thumb { width:60px; height:60px; object-fit:cover; border-radius:6px; cursor:pointer; border:2px solid transparent; transition:border .3s ease; }
+    .gallery .thumb:hover { border:2px solid var(--accent); }
+
+    .product-info {
+      flex: 1.2;
+      background: var(--card);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      color: #ccc;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .desc {
+      line-height: 1.6;
+      font-size: 15px;
+      color: #ddd;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 10px;
+      margin-top: 20px;
+      color: var(--accent);
+    }
+
+    .specs {
+      background: #11171c;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 20px;
+    }
+
+    .spec {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .spec:last-child { border: 0; }
+    .spec span:first-child { font-weight: 600; color: #ccc; }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      background: #11171c;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #555;
+    }
+
+    .quantity-control button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    .quantity-control input {
+      width: 50px;
+      text-align: center;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 16px;
+      appearance: textfield;
+    }
+
+    /* remove spinner arrows */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number] {
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+
+    .btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), #4bd9a6);
+      color: #000;
+      border: 0;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #888;
+      font-size: 13px;
+    }
+
+    #lightbox { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:1000; }
+    #lightbox img { max-width:90%; max-height:90%; border-radius:12px; }
+    #close-lightbox { position:absolute; top:20px; right:30px; font-size:40px; color:#fff; cursor:pointer; }
+    #prev, #next { position:absolute; font-size:60px; color:#fff; cursor:pointer; user-select:none; }
+    #prev { left:30px; }
+    #next { right:30px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <div class="brand">
+        <div class="logo">
+          <img src="../recources/images/TweeLoop_Logo.png" alt="TweeLoop Logo" style="width:100%; height:100%; object-fit:contain; border-radius:12px;">
+        </div>
+        <div>
+          <h1>TweeLoop</h1>
+          <div class="tag">Hoge Kwaliteit Producten</div>
+        </div>
+      </div>
+	  <button class="btn" onclick="window.location.href='../index.html'">← Terug</button>
+	  <button class="Mandbtn">Winkelmandje</button>
+    </header>
+
+    <main>
+      <div class="product-img">
+        <div class="main-img-wrapper"><img id="main-img" src="../recources/images/Oplader_Mini-Usba-1.png" alt="Casio fx-CG50"></div>
+        <div class="gallery">
+          <img class="thumb" src="../recources/images/Oplader_Mini-Usba-1.png">
+          <img class="thumb" src="../recources/images/Oplader_Mini-Usba-2.png">
+          <img class="thumb" src="../recources/images/Oplader_Mini-Usba-3.png">
+        </div>
+      </div>
+
+      <div class="product-info">
+        <div class="title">TweeLoop Oplader</div>
+        <div class="subtitle">Universele USB-oplader</div>
+
+        <div id="price" class="price">€2,99</div>
+
+        <div class="desc">
+          Betrouwbare USB-oplader van hoge kwaliteit, perfect voor dagelijks gebruik.  
+          Compatibel met de meeste apparaten, compact en duurzaam.
+        </div>
+
+        <div class="section-title">Informatie</div>
+        <div class="specs">
+          <div class="spec"><span>Type</span><span>USB-Mini naar USB-A oplader</span></div>
+          <div class="spec"><span>Vermogen</span><span>5V / 2A</span></div>
+          <div class="spec"><span>Kleur</span><span>Zwart</span></div>
+          <div class="spec"><span>Prijs</span><span>€2,99</span></div>
+        </div>
+
+        <div class="actions">
+          <div class="quantity-control">
+            <button id="minus">-</button>
+            <input id="quantity" type="number" value="1" min="1">
+            <button id="plus">+</button>
+          </div>
+          <button class="btn btn-primary" id="add-cart-btn">Toevoegen aan winkelmand</button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <span id="year"></span> TweeLoop - Alle rechten voorbehouden
+    </footer>
+  </div>
+
+  <div id="lightbox">
+    <span id="close-lightbox">&times;</span>
+    <img id="lightbox-img" src="">
+    <span id="prev">&#10094;</span>
+    <span id="next">&#10095;</span>
+  </div>
+
+  <script>
+    document.getElementById('year').innerText = new Date().getFullYear();
+
+    const quantity = document.getElementById('quantity');
+    const plus = document.getElementById('plus');
+    const minus = document.getElementById('minus');
+    const btn = document.getElementById('add-cart-btn');
+
+    const price = 2.99;
+
+    plus.addEventListener('click', () => {
+      quantity.value = parseInt(quantity.value) + 1;
+    });
+
+    minus.addEventListener('click', () => {
+      if (quantity.value > 1) quantity.value = parseInt(quantity.value) - 1;
+    });
+
+    btn.addEventListener('click', () => {
+      const qty = parseInt(quantity.value);
+      const total = (price * qty).toFixed(2).replace('.', ',');
+      alert(`Toegevoegd aan winkelmand: ${qty} x Oplader\nTotaal: €${total}`);
+    });
+  </script>
+</body>
+</html>
